@@ -1,5 +1,6 @@
 package com.abc.firstspringboot.domain.posts;
 
+import com.abc.firstspringboot.domain.BaseTimeEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +14,7 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor  // 기본생성자
 @Entity // table 과 매칭될 entity 클래스, thisItem(카멜케이스) -> this_item
-public class Posts {
+public class Posts extends BaseTimeEntity {
 
     @Id // primary key
     // pk 생성규칙 spring boot 2.0 에서는 아래 옵션 추가해야  auto increment
