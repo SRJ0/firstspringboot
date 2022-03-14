@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest
+@SpringBootTest // h2 db 자동실행
 public class PostsRepositoryTest {
 
     @Autowired
@@ -21,15 +21,19 @@ public class PostsRepositoryTest {
 
     @AfterEach // 단위테스트가 끝날 때마다 수행되는 메소드 지정
     public void cleanup() {
-
         postsRepository.deleteAll();
     }
+
     @Test
     public void postsSaveLoad() {
         String title = "테스트 게시글";
         String content = "테스트 본문";
 
-        postsRepository.save(Posts.builder().title(title).content(content).author("auth").build());
+        postsRepository.save(Posts.builder() // id exist - update else - insert
+                .title(title)
+                .content(content)
+                .author("auth")
+                .build());
 
         //when
         List<Posts> postsList = postsRepository.findAll();
