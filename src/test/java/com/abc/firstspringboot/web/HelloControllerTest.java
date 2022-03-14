@@ -11,7 +11,7 @@ import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@ExtendWith(SpringExtension.class) // 테스트 진행시 SpringRunner 실행자를 사용
+@ExtendWith(SpringExtension.class) // 테스트 진행시 SpringExtension 실행자를 사용
 @WebMvcTest(controllers = HelloController.class) // @Controller @ControllerAdvice 등 사용
 
 public class HelloControllerTest {
