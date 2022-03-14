@@ -2,13 +2,17 @@ package com.abc.firstspringboot.service.posts;
 
 import com.abc.firstspringboot.domain.posts.Posts;
 import com.abc.firstspringboot.domain.posts.PostsRepository;
+import com.abc.firstspringboot.web.dto.PostsListResponseDto;
 import com.abc.firstspringboot.web.dto.PostsResponseDto;
 import com.abc.firstspringboot.web.dto.PostsSaveRequestDto;
 import com.abc.firstspringboot.web.dto.PostsUpdateReqeustDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 // Autowired 대신 생성자로 Bean을 주입받음, 롬복으로 변경시 생성자를 수정해야하는 불편 해소
@@ -40,6 +44,13 @@ public class PostsService {
                 .orElseThrow(()->new
                         IllegalArgumentException("해당 게시글이 없습니다. id="+id));
         return new PostsResponseDto(entity);
+    }
+
+    @Transactional(readOnly = true) // 조회 속도 개선
+    public List<PostsListResponseDto> findAllDesc() {
+        return postsRepository.findAllDesc().stream()
+                .map(PostsListResponseDto::new) // (posts -> new PostsListResponseDto(posts))
+                .collect(Collectors.toList());
     }
 
 }
