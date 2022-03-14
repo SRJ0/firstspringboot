@@ -31,7 +31,7 @@ public class Posts {
     // @Column 없어도 모든 필드는 컬럼이 된다.
     private String author;
 
-    @Builder // 빌더 패턴 클래스 생성, 생성자 상단 선언시 생성자에 포함된 필드만 포함
+    @Builder // 빌더 패턴 클래스 생성, 생성자의 상단에 선언시 생성자에 포함된 필드만 포함
     // 필드를 명확히 지정가능 builder().a(a).b(b).build();
     public Posts(String title, String content, String author) {
         this.title = title;
