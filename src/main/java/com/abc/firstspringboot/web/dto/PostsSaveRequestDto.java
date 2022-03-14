@@ -6,11 +6,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor // 기본 생성자
 public class PostsSaveRequestDto {
     private String title;
     private String content;
     private String author;
+
     @Builder
     public PostsSaveRequestDto(String title, String content, String author) {
         this.title = title;

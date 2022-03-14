@@ -1,5 +1,6 @@
 package com.abc.firstspringboot.service.posts;
 
+import com.abc.firstspringboot.domain.posts.Posts;
 import com.abc.firstspringboot.domain.posts.PostsRepository;
 import com.abc.firstspringboot.web.dto.PostsResponseDto;
 import com.abc.firstspringboot.web.dto.PostsSaveRequestDto;
@@ -20,11 +21,25 @@ public class PostsService {
     public Long save(PostsSaveRequestDto requestDto) {
         return postsRepository.save(requestDto.toEntity()).getId();
     }
-/*
+
+    @Transactional
     public Long update(Long id, PostsUpdateReqeustDto requestDto) {
+        // jpa의 영속성 컨텍스트, 엔티티를 영구저장하는 환경을 의미하는 논리적 개념
+        // 엔티티 매니저 활성상태에서 트랜잭션 끝나는 시점에 변경을 반영하므로 update 쿼리 불필요 (더티 체킹)
+        Posts posts = postsRepository.findById(id)
+                .orElseThrow(()->new
+                        IllegalArgumentException("해당 게시글이 없습니다. id="+id));
+
+        posts.update(requestDto.getTitle(), requestDto.getContent());
+
+        return id;
     }
 
     public PostsResponseDto findById(Long id) {
+        Posts entity = postsRepository.findById(id)
+                .orElseThrow(()->new
+                        IllegalArgumentException("해당 게시글이 없습니다. id="+id));
+        return new PostsResponseDto(entity);
     }
- */
+
 }
