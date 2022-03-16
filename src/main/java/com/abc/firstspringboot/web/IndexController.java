@@ -29,7 +29,7 @@ public class IndexController {
         //SessionUser user = (SessionUser) httpSession.getAttribute("user");
 
         if(user != null) {
-            model.addAttribute("userName", user.getName());
+            model.addAttribute("theuserName", user.getName());
         }
 
         return "index"; // 앞뒤는 mustache starter 에서 자동 지정

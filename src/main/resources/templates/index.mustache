@@ -7,15 +7,17 @@
          <div class="col-md-6">
              <a href="/posts/save" role="button" class="btn btn-primary">글 등록</a>
              <!-- userName 값이 있다면 노출, t/f 만 판단하므로 항상 최종값을 넘겨줘야 -->
-             {{#userName}}
-                 Logged in as: <span id="user">{{userName}}</span>
+             {{#theuserName}}
+                 Logged in as: <span id="user">{{theuserName}}</span>
                 <!-- 기본 url. SecurityConfig 에서 변경가능 -->
                 <a href="/logout" class="btn btn-info active" role="button">logout</a>
              <!-- 없다면 로그인 버튼을 노출. -->
-             {{/userName}}
-             {{^userName}}
-                 <a href="/oauth2/authorization/google" class="btn btn-succes active" role="button">Google Login</a>
-             {{/userName}}
+             {{/theuserName}}
+             {{^theuserName}}
+                 <a href="/oauth2/authorization/google" class="btn btn-success active" role="button">Google Login</a>
+             <!-- 네이버 로그인 url은 properties > redirect-uri 값에 맞춰 자동으로 등록된다 -->
+                 <a href="/oauth2/authorization/naver" class="btn btn-secondary active" role="button">Naver Login</a>
+             {{/theuserName}}
          </div>
     </div>
     <br>
