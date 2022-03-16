@@ -1,9 +1,13 @@
 package com.abc.firstspringboot.web;
 
+import com.abc.firstspringboot.config.auth.SecurityConfig;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.FilterType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -12,12 +16,17 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ExtendWith(SpringExtension.class) // 테스트 진행시 SpringExtension 실행자를 사용
-@WebMvcTest(controllers = HelloController.class) // @Controller @ControllerAdvice 등 사용
+@WebMvcTest(controllers = HelloController.class, // @Controller @ControllerAdvice 등 사용
+    excludeFilters = {
+        @ComponentScan.Filter(type= FilterType.ASSIGNABLE_TYPE, classes= SecurityConfig.class)
+    }
+)
 
 public class HelloControllerTest {
     @Autowired // Bean 주입
     private MockMvc mvc; // web api test시 사용
 
+    @WithMockUser(roles="USER")
     @Test
     public void returnHello() throws Exception {
         String hello = "hello";
@@ -25,6 +34,8 @@ public class HelloControllerTest {
                 .andExpect(status().isOk()) // http header 검증
                 .andExpect(content().string(hello)); // 내용을 검증
     }
+
+    @WithMockUser(roles="USER")
     @Test
     public void returnHelloDto() throws Exception {
         String name = "hello";
