@@ -19,7 +19,7 @@ script: "./gradlew clean build"
 
 # codedeploy는 jar 인식 못하므로 압축
 before_deploy:
-  - zip -r freelec-springboot2-webservice
+  - zip -r freelec-springboot2-webservice *
   - mkdir -p deploy #
   - mv freelec-springboot2-webservice.zip deploy/freelec-springboot2-webservice.zip
 
