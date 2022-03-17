@@ -1,0 +1,22 @@
+language: java
+jdk:
+  - openjdk8
+branches:
+  only:
+    - master
+
+# travis ci server's home
+# 그레이들을 통해 의존성을 받게 되면 이를 해당 디렉토리에 캐시하여, 같은 의존성은 다음 배포 때 받지 않도록
+cache:
+  directories:
+    - '$HOME/.m2/repository'
+    - '$HOME/.gradle'
+
+# push 되었을때 clean, build를 수행
+script: "./gradlew clean build"
+
+# 완료시 noti
+notifications:
+  email:
+    recipients:
+      slche25@gmail.com
