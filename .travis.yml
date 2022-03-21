@@ -20,7 +20,7 @@ script: "./gradlew clean build"
 # codedeploy는 jar 인식 못하므로 압축
 before_deploy:
   - mkdir -p before-deploy # travis ci는 디렉토리 단위로만 업로드가능
-  - cp script/*.sh before-deploy/
+  - cp scripts/*.sh before-deploy/
   - cp appspec.yml before-deploy/
   - cp build/libs/*.jar before-deploy/
   - cd before-deploy && zip -r before-deploy *
