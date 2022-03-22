@@ -21,7 +21,7 @@ do
   then # $up_count >= 1 ("real" 문자열이 있는지 검증)
     echo "> Health Check 성공"
     # 성공시 프록시 설정을 변경
-    switch_porxy
+    switch_proxy
     break
   else
     echo "> Health check의 응답을 알 수 없거나 실행 상태가 아님"
